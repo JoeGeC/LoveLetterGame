@@ -1,11 +1,15 @@
-﻿using LoveLetter.Players;
+﻿using LoveLetter.Cards.Listeners;
+using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
     public class Priest : Card
     {
-        public Priest()
+        readonly IPriestListener listener;
+        
+        public Priest(IPriestListener listener)
         {
+            this.listener = listener;
             Name = "Priest";
             Description = "Look at another player's hand.";
             Value = 2;
@@ -13,7 +17,8 @@ namespace LoveLetter.Cards
 
         public override void DoAction(Player currentPlayer)
         {
-            throw new System.NotImplementedException();
+            base.DoAction(currentPlayer);
+            listener.ShowHandOf(currentPlayer.ChoosePlayer(), currentPlayer);
         }
     }
 }

@@ -6,7 +6,7 @@ using LoveLetter.Players;
 
 namespace LoveLetter
 {
-    public class Game: IGuardListener
+    public class Game: IGuardListener, IPriestListener
     {
         private readonly Deck deck;
 
@@ -52,6 +52,13 @@ namespace LoveLetter
         {
             var player = players.ElementAt(playerNumber - 1);
             if (player.HasCard(card)) player.OutOfRound();
+            else Console.WriteLine("Player did not have a {card}");
+        }
+
+        public void ShowHandOf(int playerNumber, Player currentPlayer)
+        {
+            var player = players.ElementAt(playerNumber - 1);
+            currentPlayer.SeeHandOf(player);
         }
     }
 }

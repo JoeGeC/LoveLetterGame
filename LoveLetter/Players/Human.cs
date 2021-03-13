@@ -16,15 +16,15 @@ namespace LoveLetter.Players
             Card playCard = null;
             while (playCard == null)
             {
-                Console.Write("Please pick a card to play: ");
                 var cardChoice = ChooseCard();
-                playCard = Hand.First(card => card.Name.ToLower().Equals(cardChoice));
+                playCard = Hand.FirstOrDefault(card => card.Name.ToLower().Equals(cardChoice));
             }
             Play(playCard);
         }
 
         public override int ChoosePlayer()
         {
+            Console.Write("Choose a player: ");
             var input = Console.ReadLine();
             int.TryParse(input, out var inputAsInt);
             return inputAsInt;
@@ -32,7 +32,13 @@ namespace LoveLetter.Players
 
         public override string ChooseCard()
         {
+            Console.Write("Choose a Card: ");
             return Console.ReadLine()?.ToLower();
+        }
+
+        public override void SeeHandOf(Player player)
+        {
+            player.PrintHand();
         }
 
         public override void TakeCard(Card card)

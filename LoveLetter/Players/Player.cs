@@ -19,17 +19,18 @@ namespace LoveLetter.Players
         public abstract void PlayTurn();
         public abstract int ChoosePlayer();
         public abstract string ChooseCard();
+        public abstract void SeeHandOf(Player player);
 
         public virtual void TakeCard(Card card)
         {
             Hand.Add(card);
         }
 
-        protected void PrintHand()
+        public void PrintHand()
         {
             Hand.ForEach(card => card.Print());
+            Console.WriteLine("\n");
         }
-
 
         public bool HasCard(string card)
         {

@@ -29,18 +29,16 @@ namespace LoveLetter.Cards
         {
             while (true)
             {
-                Console.Write("Choose a player: ");
                 var chosenPlayer = currentPlayer.ChoosePlayer();
                 if (chosenPlayer > 0 && chosenPlayer < 5)
                     return chosenPlayer;
             }
         }
 
-        private string ChooseCard(Player currentPlayer)
+        private static string ChooseCard(Player currentPlayer)
         {
             while (true)
             {
-                Console.Write("Choose a Card: ");
                 var input = currentPlayer.ChooseCard();
                 if (input != null && !input.Equals("guard") && input.IsACard())
                     return input;
