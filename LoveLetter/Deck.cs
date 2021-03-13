@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LoveLetter.Cards;
 
 namespace LoveLetter
@@ -24,5 +26,24 @@ namespace LoveLetter
             new Guard(),
             new Guard()
         };
+
+        public void Shuffle()
+        {
+            var random = new Random();
+            deck = deck.OrderBy(a => random.Next()).ToList();
+            Console.WriteLine("Deck shuffled.");
+        }
+
+        public Card TakeTopCard()
+        {
+            var topCard = deck.ElementAt(0);
+            deck.RemoveAt(0);
+            return topCard;
+        }
+
+        public bool IsEmpty()
+        {
+            return deck.Count == 0;
+        }
     }
 }

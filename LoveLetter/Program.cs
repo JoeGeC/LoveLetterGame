@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace LoveLetter
+﻿namespace LoveLetter
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+            game.Play();
         }
     }
 }
