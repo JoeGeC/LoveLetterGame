@@ -15,12 +15,18 @@ namespace LoveLetter.Players
             base.PlayTurn(playerFinder);
             PrintHand();
             Card playCard = null;
+            if (HasCard("countess") && (HasCard("king") || HasCard("prince"))) playCard = GetCardFromHand("countess");
             while (playCard == null)
             {
                 var cardChoice = ChooseCard();
-                playCard = Hand.FirstOrDefault(card => card.Name.ToLower().Equals(cardChoice));
+                playCard = GetCardFromHand(cardChoice);
             }
             Play(playCard, playerFinder);
+        }
+
+        private Card GetCardFromHand(string cardChoice)
+        {
+            return Hand.FirstOrDefault(card => card.Name.ToLower().Equals(cardChoice));
         }
 
         public override int ChoosePlayer()

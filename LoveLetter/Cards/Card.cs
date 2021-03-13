@@ -30,7 +30,7 @@ namespace LoveLetter.Cards
             while (true)
             {
                 var chosenPlayerNumber = currentPlayer.ChoosePlayer();
-                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
+                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber - 1);
                 if (chosenPlayer == null) continue;
                 if (chosenPlayer.Vulnerable) return chosenPlayer;
                 Console.WriteLine("Player is protected by handmaid!");

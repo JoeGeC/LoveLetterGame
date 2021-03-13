@@ -55,7 +55,7 @@ namespace LoveLetter
 
         public void DealCard(Player player)
         {
-            player.TakeCard(deck.TakeTopCard());
+            if(player.IsInRound) player.TakeCard(deck.TakeTopCard());
         }
     }
 }

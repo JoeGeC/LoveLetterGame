@@ -61,6 +61,7 @@ namespace LoveLetter.Players
         {
             Hand.Remove(card);
             Console.WriteLine($"Player {number} discarded {card.Name}");
+            if(card.Is("princess")) OutOfRound();
         } 
 
         public Card FirstCard()
