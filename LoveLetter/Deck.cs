@@ -11,6 +11,11 @@ namespace LoveLetter
 
         public Deck(IDealListener dealListener)
         {
+            NewDeck(dealListener);
+        }
+
+        public void NewDeck(IDealListener dealListener)
+        {
             deck = new List<Card>()
             {
                 new Princess(),

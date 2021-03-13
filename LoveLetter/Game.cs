@@ -33,6 +33,8 @@ namespace LoveLetter
 
         private void PlayRound()
         {
+            players.ForEach(player => player.NewRound());
+            deck.NewDeck(this);
             deck.Shuffle();
             deck.TakeTopCard();
             DealCards();
@@ -43,16 +45,16 @@ namespace LoveLetter
 
         private void FindWinner()
         {
-            var result = new List<Player>();
+            Player result = null;
             foreach (var player in players.Where(player => player.IsInRound))
-                result.Add(CompareWinner(result.ElementAt(0).FirstCard().Value, player));
-            result.ForEach(player => player.AddToken());
-        }
-
-        private static Player CompareWinner(int winningValue, Player player)
-        {
-            if (winningValue == 0) return player;
-            return player.FirstCard().Value > winningValue ? player : null;
+            {
+                Console.WriteLine($"Player {player.Number} had a {player.FirstCard().Name}.");
+                result ??= player;
+                if (player.FirstCard().Value > result.FirstCard().Value) result = player;
+            }
+            if (result == null) return;
+            Console.WriteLine($"Player {result.Number} won the round!");
+            result.AddToken();
         }
 
         private bool OnePlayerLeft()
@@ -83,9 +85,9 @@ namespace LoveLetter
             return players.ElementAtOrDefault(number);
         }
 
-        public bool ValidPlayersAvailable()
+        public bool ValidPlayersAvailable(Player currentPlayer)
         {
-            return players.Any(player => player.IsInRound && player.Vulnerable);
+            return players.Any(player => player.Number != currentPlayer.Number && player.IsInRound && player.Vulnerable);
         }
 
         public void DealCard(Player player)

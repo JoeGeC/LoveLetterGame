@@ -27,7 +27,7 @@ namespace LoveLetter.Cards
 
         protected static Player ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            if (!playerFinder.ValidPlayersAvailable()) return NoValidPlayers();
+            if (!playerFinder.ValidPlayersAvailable(currentPlayer)) return NoValidPlayers();
             while (true)
             {
                 var chosenPlayerNumber = currentPlayer.ChoosePlayer();

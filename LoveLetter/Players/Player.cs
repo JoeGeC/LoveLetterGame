@@ -80,8 +80,16 @@ namespace LoveLetter.Players
 
         public void AddToken()
         {
+            Console.WriteLine($"Player {Number} got a token!");
             Tokens++;
             tokenChangeListener.OnTokenChanged(this);
+        }
+
+        public void NewRound()
+        {
+            IsInRound = true;
+            Vulnerable = true;
+            Hand = new List<Card>();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace LoveLetter.Players
         public override int ChoosePlayer()
         {
             Console.Write("Choose a player: ");
-            var randomNumber = random.Next(1, 4); 
+            var randomNumber = random.Next(1, 5); 
             Thread.Sleep(ChoiceDelay);
             Console.WriteLine(randomNumber);
             return randomNumber;
