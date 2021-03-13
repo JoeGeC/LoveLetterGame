@@ -15,6 +15,7 @@ namespace LoveLetter.Cards
         {
             base.DoAction(currentPlayer, playerFinder);
             var player = ChoosePlayer(currentPlayer, playerFinder);
+            if (player == null) return;
             currentPlayer.TradeHands(player);
         }
     }

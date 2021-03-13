@@ -83,6 +83,11 @@ namespace LoveLetter
             return players.ElementAtOrDefault(number);
         }
 
+        public bool ValidPlayersAvailable()
+        {
+            return players.Any(player => player.IsInRound && player.Vulnerable);
+        }
+
         public void DealCard(Player player)
         {
             if(player.IsInRound) player.TakeCard(deck.TakeTopCard());

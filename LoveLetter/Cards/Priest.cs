@@ -15,6 +15,7 @@ namespace LoveLetter.Cards
         {
             base.DoAction(currentPlayer, playerFinder);
             var chosenPlayer = ChoosePlayer(currentPlayer, playerFinder);
+            if (chosenPlayer == null) return;
             ShowHandOf(chosenPlayer, currentPlayer);
         }
 

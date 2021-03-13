@@ -27,6 +27,7 @@ namespace LoveLetter.Cards
 
         protected static Player ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
         {
+            if (!playerFinder.ValidPlayersAvailable()) return NoValidPlayers();
             while (true)
             {
                 var chosenPlayerNumber = currentPlayer.ChoosePlayer();
@@ -34,6 +35,12 @@ namespace LoveLetter.Cards
                 if (!IsValidPlayer(chosenPlayer, currentPlayer)) continue;
                 return chosenPlayer;
             }
+        }
+
+        private static Player NoValidPlayers()
+        {
+            Console.WriteLine("No valid players.");
+            return null;
         }
 
         private static bool IsValidPlayer(Player chosenPlayer, Player currentPlayer)
