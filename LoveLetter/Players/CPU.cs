@@ -10,7 +10,7 @@ namespace LoveLetter.Players
         private readonly Random random = new Random();
         private const int ChoiceDelay = 1000;
 
-        public Cpu(int number) : base(number)
+        public Cpu(int number, ITokenChangeListener tokenChangeListener) : base(number, tokenChangeListener)
         {
         }
 

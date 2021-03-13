@@ -22,7 +22,7 @@ namespace LoveLetter.Cards
         private void CompareHands(Player chosenPlayer, Player currentPlayer)
         {
             if(chosenPlayer.FirstCard().Value > currentPlayer.FirstCard().Value) currentPlayer.OutOfRound();
-            if(chosenPlayer.FirstCard().Value < currentPlayer.FirstCard().Value) chosenPlayer.OutOfRound();
+            else if(chosenPlayer.FirstCard().Value < currentPlayer.FirstCard().Value) chosenPlayer.OutOfRound();
         }
     }
 }

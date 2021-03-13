@@ -6,7 +6,7 @@ namespace LoveLetter.Players
 {
     public class Human : Player
     {
-        public Human(int number) : base(number)
+        public Human(int number, ITokenChangeListener tokenChangeListener) : base(number, tokenChangeListener)
         {
         }
 

@@ -8,15 +8,17 @@ namespace LoveLetter.Players
     public abstract class Player
     {
         public readonly int Number;
+        private readonly ITokenChangeListener tokenChangeListener;
         protected List<Card> Hand = new List<Card>();
         public bool IsInRound = true;
         public bool Vulnerable = true;
+        public int Tokens = 0;
 
-        protected Player(int number)
+        protected Player(int number, ITokenChangeListener tokenChangeListener)
         {
             Number = number;
+            this.tokenChangeListener = tokenChangeListener;
         }
-
 
         public abstract int ChoosePlayer();
         public abstract string ChooseCard();
@@ -46,7 +48,7 @@ namespace LoveLetter.Players
         {
             IsInRound = false;
             Console.WriteLine($"Player {Number} is out of the round!");
-            Discard(Hand.ElementAt(0));
+            if (Hand.Count > 0) Discard(FirstCard());
         }
         
         protected void Play(Card card, IPlayerFinder playerFinder)
@@ -54,6 +56,7 @@ namespace LoveLetter.Players
             Hand.Remove(card);
             Console.WriteLine($"Player {Number} played {card.Name}");
             card.DoAction(this, playerFinder);
+            if(card.Is("princess")) OutOfRound();
         }
 
         public void Discard(Card card)
@@ -73,6 +76,12 @@ namespace LoveLetter.Players
             var tempHand = Hand;
             Hand = player.Hand;
             player.Hand = tempHand;
+        }
+
+        public void AddToken()
+        {
+            Tokens++;
+            tokenChangeListener.OnTokenChanged(this);
         }
     }
 }

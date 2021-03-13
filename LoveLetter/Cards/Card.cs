@@ -25,16 +25,42 @@ namespace LoveLetter.Cards
             return Name.ToLower().Equals(cardName.ToLower());
         }
 
-        protected Player ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
+        protected static Player ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
         {
             while (true)
             {
                 var chosenPlayerNumber = currentPlayer.ChoosePlayer();
                 var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber - 1);
-                if (chosenPlayer == null) continue;
-                if (chosenPlayer.Vulnerable) return chosenPlayer;
-                Console.WriteLine("Player is protected by handmaid!");
+                if (!IsValidPlayer(chosenPlayer, currentPlayer)) continue;
+                return chosenPlayer;
             }
+        }
+
+        private static bool IsValidPlayer(Player chosenPlayer, Player currentPlayer)
+        {
+            if (chosenPlayer == null) return false;
+            if (chosenPlayer.Number == currentPlayer.Number) return ChosenPlayerIsYou();
+            if (!chosenPlayer.IsInRound) return ChosenPlayerIsOutOfRound(chosenPlayer);
+            if (!chosenPlayer.Vulnerable) return ChosenPlayerIsProtected();
+            return true;
+        }
+
+        private static bool ChosenPlayerIsOutOfRound(Player chosenPlayer)
+        {
+            Console.WriteLine($"Player {chosenPlayer.Number} is out. Choose another player.");
+            return false;
+        }
+
+        private static bool ChosenPlayerIsYou()
+        {
+            Console.WriteLine("That is you! Choose another player.");
+            return false;
+        }
+
+        private static bool ChosenPlayerIsProtected()
+        {
+            Console.WriteLine("Player is protected by handmaid!");
+            return false;
         }
     }
 }
