@@ -9,15 +9,15 @@ namespace LoveLetter
     {
         private List<Card> deck;
 
-        public Deck(Game game)
+        public Deck(IDealListener dealListener)
         {
             deck = new List<Card>()
             {
                 new Princess(),
                 new Countess(),
                 new King(),
-                new Prince(),
-                new Prince(),
+                new Prince(dealListener),
+                new Prince(dealListener),
                 new Handmaid(),
                 new Handmaid(),
                 new Baron(),

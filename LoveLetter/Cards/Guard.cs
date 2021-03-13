@@ -16,22 +16,9 @@ namespace LoveLetter.Cards
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
             base.DoAction(currentPlayer, playerFinder);
-            var playerNumber = ChoosePlayer(currentPlayer, playerFinder);
-            var player = playerFinder.PlayerAt(playerNumber);
+            var player = ChoosePlayer(currentPlayer, playerFinder);
             var card = ChooseCard(currentPlayer);
             DoGuardAction(player, card);
-        }
-
-        private static int ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
-        {
-            while (true)
-            {
-                var chosenPlayerNumber = currentPlayer.ChoosePlayer();
-                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
-                if (chosenPlayer == null) continue;
-                if (chosenPlayer.Vulnerable) return chosenPlayerNumber;
-                Console.WriteLine("Player is protected by handmaid!");
-            }
         }
 
         private static string ChooseCard(Player currentPlayer)

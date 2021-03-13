@@ -24,5 +24,17 @@ namespace LoveLetter.Cards
         {
             return Name.ToLower().Equals(cardName.ToLower());
         }
+
+        protected Player ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
+        {
+            while (true)
+            {
+                var chosenPlayerNumber = currentPlayer.ChoosePlayer();
+                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
+                if (chosenPlayer == null) continue;
+                if (chosenPlayer.Vulnerable) return chosenPlayer;
+                Console.WriteLine("Player is protected by handmaid!");
+            }
+        }
     }
 }

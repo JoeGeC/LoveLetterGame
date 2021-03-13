@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LoveLetter.Cards;
 using LoveLetter.Players;
 
 namespace LoveLetter
 {
-    public class Game: IPlayerFinder
+    public class Game: IPlayerFinder, IDealListener
     {
         private readonly Deck deck;
 
@@ -50,6 +51,11 @@ namespace LoveLetter
         public Player PlayerAt(int number)
         {
             return players.ElementAtOrDefault(number);
+        }
+
+        public void DealCard(Player player)
+        {
+            player.TakeCard(deck.TakeTopCard());
         }
     }
 }

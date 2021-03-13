@@ -1,5 +1,4 @@
-﻿using System;
-using LoveLetter.Players;
+﻿using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
@@ -15,18 +14,8 @@ namespace LoveLetter.Cards
         
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            while (true)
-            {
-                var chosenPlayerNumber = currentPlayer.ChoosePlayer();
-                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
-                if (chosenPlayer == null) continue;
-                if (chosenPlayer.Vulnerable)
-                {
-                    CompareHands(chosenPlayer, currentPlayer);
-                    return;
-                } 
-                Console.WriteLine("Player is protected by handmaid!");
-            }
+            var chosenPlayer = ChoosePlayer(currentPlayer, playerFinder);
+            CompareHands(chosenPlayer, currentPlayer);
         }
 
         private void CompareHands(Player chosenPlayer, Player currentPlayer)

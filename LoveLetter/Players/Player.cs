@@ -57,11 +57,11 @@ namespace LoveLetter.Players
             card.DoAction(this, playerFinder);
         }
 
-        private void Discard(Card card)
+        public void Discard(Card card)
         {
             Hand.Remove(card);
             Console.WriteLine($"Player {number} discarded {card.Name}");
-        }
+        } 
 
         public Card FirstCard()
         {
