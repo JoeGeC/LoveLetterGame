@@ -34,7 +34,7 @@ namespace LoveLetter.Cards
         private static void DoGuardAction(Player player, string card)
         {
             if (player.HasCard(card)) player.OutOfRound();
-            else Console.WriteLine("Player did not have a {card}");
+            else Console.WriteLine($"Player {player.Number} did not have a {card}");
         }
     }
 }

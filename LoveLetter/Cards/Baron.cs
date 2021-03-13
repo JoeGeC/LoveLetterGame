@@ -14,6 +14,7 @@ namespace LoveLetter.Cards
         
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
+            base.DoAction(currentPlayer, playerFinder);
             var chosenPlayer = ChoosePlayer(currentPlayer, playerFinder);
             CompareHands(chosenPlayer, currentPlayer);
         }

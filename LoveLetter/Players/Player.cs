@@ -7,14 +7,14 @@ namespace LoveLetter.Players
 {
     public abstract class Player
     {
-        private readonly int number;
+        public readonly int Number;
         protected List<Card> Hand = new List<Card>();
         public bool IsInRound = true;
         public bool Vulnerable = true;
 
         protected Player(int number)
         {
-            this.number = number;
+            Number = number;
         }
 
 
@@ -35,7 +35,6 @@ namespace LoveLetter.Players
         public void PrintHand()
         {
             Hand.ForEach(card => card.Print());
-            Console.WriteLine("\n");
         }
 
         public bool HasCard(string card)
@@ -46,21 +45,21 @@ namespace LoveLetter.Players
         public void OutOfRound()
         {
             IsInRound = false;
-            Console.WriteLine($"Player {number} is out of the round!");
+            Console.WriteLine($"Player {Number} is out of the round!");
             Discard(Hand.ElementAt(0));
         }
         
         protected void Play(Card card, IPlayerFinder playerFinder)
         {
             Hand.Remove(card);
-            Console.WriteLine($"Player {number} played {card.Name}");
+            Console.WriteLine($"Player {Number} played {card.Name}");
             card.DoAction(this, playerFinder);
         }
 
         public void Discard(Card card)
         {
             Hand.Remove(card);
-            Console.WriteLine($"Player {number} discarded {card.Name}");
+            Console.WriteLine($"Player {Number} discarded {card.Name}");
             if(card.Is("princess")) OutOfRound();
         } 
 

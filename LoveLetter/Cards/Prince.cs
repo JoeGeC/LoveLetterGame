@@ -16,6 +16,7 @@ namespace LoveLetter.Cards
 
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
+            base.DoAction(currentPlayer, playerFinder);
             var player = ChoosePlayer(currentPlayer, playerFinder);
             player.Discard(player.FirstCard());
             listener.DealCard(player);

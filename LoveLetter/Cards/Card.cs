@@ -16,8 +16,8 @@ namespace LoveLetter.Cards
 
         public void Print()
         {
-            Console.WriteLine("\n" + Name + " - " + Value);
-            Console.WriteLine(Description);
+            Console.WriteLine($"    {Name} - {Value}");
+            Console.WriteLine($"    {Description} \n");
         }
 
         public bool Is(string cardName)

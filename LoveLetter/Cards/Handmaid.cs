@@ -13,6 +13,7 @@ namespace LoveLetter.Cards
 
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
+            base.DoAction(currentPlayer, playerFinder);
             currentPlayer.Vulnerable = false;
         }
     }

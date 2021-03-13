@@ -13,6 +13,7 @@ namespace LoveLetter.Players
         public override void PlayTurn(IPlayerFinder playerFinder)
         {
             base.PlayTurn(playerFinder);
+            Console.WriteLine("Your hand: \n");
             PrintHand();
             Card playCard = null;
             if (HasCard("countess") && (HasCard("king") || HasCard("prince"))) playCard = GetCardFromHand("countess");

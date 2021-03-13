@@ -1,6 +1,4 @@
-﻿using LoveLetter.Players;
-
-namespace LoveLetter.Cards
+﻿namespace LoveLetter.Cards
 {
     public class Princess : Card
     {
@@ -9,10 +7,6 @@ namespace LoveLetter.Cards
             Name = "Princess";
             Description = "If you discard this card you are out of the round.";
             Value = 8;
-        }
-
-        public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
-        {
         }
     }
 }
