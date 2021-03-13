@@ -1,4 +1,6 @@
-﻿namespace LoveLetter.Cards
+﻿using LoveLetter.Players;
+
+namespace LoveLetter.Cards
 {
     public class Baron : Card
     {
@@ -10,7 +12,7 @@
             Value = 3;
         }
         
-        public override void DoAction()
+        public override void DoAction(Player currentPlayer)
         {
             throw new System.NotImplementedException();
         }

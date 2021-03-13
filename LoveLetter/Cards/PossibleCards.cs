@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LoveLetter.Cards
 {
@@ -20,6 +21,13 @@ namespace LoveLetter.Cards
         public static bool IsACard(this String str)
         {
             return names.Contains(str);
+        }
+
+        public static string GetRandomName()
+        {
+            var random = new Random();
+            var randomNumber = random.Next(names.Count);
+            return names.ElementAt(randomNumber);
         }
     }
 }

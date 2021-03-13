@@ -1,4 +1,5 @@
 ﻿using System;
+using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
@@ -8,7 +9,7 @@ namespace LoveLetter.Cards
         protected string Description;
         protected int Value;
 
-        public virtual void DoAction()
+        public virtual void DoAction(Player currentPlayer)
         {
             Print();
         }

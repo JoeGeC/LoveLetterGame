@@ -15,6 +15,10 @@ namespace LoveLetter.Players
         {
             this.number = number;
         }
+        
+        public abstract void PlayTurn();
+        public abstract int ChoosePlayer();
+        public abstract string ChooseCard();
 
         public virtual void TakeCard(Card card)
         {
@@ -26,7 +30,6 @@ namespace LoveLetter.Players
             Hand.ForEach(card => card.Print());
         }
 
-        public abstract void PlayTurn();
 
         public bool HasCard(string card)
         {
@@ -44,7 +47,7 @@ namespace LoveLetter.Players
         {
             Hand.Remove(card);
             Console.WriteLine($"Player {number} played {card.Name}");
-            card.DoAction();
+            card.DoAction(this);
         }
 
         private void Discard(Card card)

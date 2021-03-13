@@ -1,5 +1,6 @@
 ﻿using System;
 using LoveLetter.Cards.Listeners;
+using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
@@ -16,34 +17,33 @@ namespace LoveLetter.Cards
             Value = 1;
         }
         
-        public override void DoAction()
+        public override void DoAction(Player currentPlayer)
         {
-            base.DoAction();
-            var player = ChoosePlayer();
-            var card = ChooseCard();
+            base.DoAction(currentPlayer);
+            var player = ChoosePlayer(currentPlayer);
+            var card = ChooseCard(currentPlayer);
             listener.DoGuardAction(player, card);
         }
 
-        private string ChooseCard()
-        {
-            while (true)
-            {
-                Console.Write("Choose a Card: ");
-                var input = Console.ReadLine()?.ToLower();
-                if (input != null && !input.Equals("guard") && input.IsACard())
-                    return input;
-            }
-        }
-
-        private static int ChoosePlayer()
+        private static int ChoosePlayer(Player currentPlayer)
         {
             while (true)
             {
                 Console.Write("Choose a player: ");
-                var input = Console.ReadLine();
-                int.TryParse(input, out var inputAsInt);
-                if (inputAsInt > 0 && inputAsInt < 5)
-                    return inputAsInt;
+                var chosenPlayer = currentPlayer.ChoosePlayer();
+                if (chosenPlayer > 0 && chosenPlayer < 5)
+                    return chosenPlayer;
+            }
+        }
+
+        private string ChooseCard(Player currentPlayer)
+        {
+            while (true)
+            {
+                Console.Write("Choose a Card: ");
+                var input = currentPlayer.ChooseCard();
+                if (input != null && !input.Equals("guard") && input.IsACard())
+                    return input;
             }
         }
     }
