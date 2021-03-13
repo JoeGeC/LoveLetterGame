@@ -47,5 +47,11 @@ namespace LoveLetter.Players
             base.TakeCard(card);
             Console.WriteLine("You took a " + card.Name);
         }
+
+        public override void TradeHands(Player player)
+        {
+            base.TradeHands(player);
+            PrintHand();
+        }
     }
 }

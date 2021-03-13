@@ -8,7 +8,7 @@ namespace LoveLetter.Players
     public abstract class Player
     {
         private readonly int number;
-        protected readonly List<Card> Hand = new List<Card>();
+        protected List<Card> Hand = new List<Card>();
         public bool IsInRound = true;
         public bool Vulnerable = true;
 
@@ -66,6 +66,13 @@ namespace LoveLetter.Players
         public Card FirstCard()
         {
             return Hand.ElementAt(0);
+        }
+
+        public virtual void TradeHands(Player player)
+        {
+            var tempHand = Hand;
+            Hand = player.Hand;
+            player.Hand = tempHand;
         }
     }
 }

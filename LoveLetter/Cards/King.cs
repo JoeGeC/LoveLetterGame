@@ -13,7 +13,8 @@ namespace LoveLetter.Cards
         
         public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            throw new System.NotImplementedException();
+            var player = ChoosePlayer(currentPlayer, playerFinder);
+            currentPlayer.TradeHands(player);
         }
     }
 }
