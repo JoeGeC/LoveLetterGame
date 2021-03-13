@@ -8,24 +8,25 @@ namespace LoveLetter.Players
     public class Cpu : Player
     {
         private readonly Random random = new Random();
-        private int choiceDelay = 1000;
+        private const int ChoiceDelay = 1000;
 
         public Cpu(int number) : base(number)
         {
         }
 
-        public override void PlayTurn()
+        public override void PlayTurn(IPlayerFinder playerFinder)
         {
-            Thread.Sleep(choiceDelay);
+            base.PlayTurn(playerFinder);
+            Thread.Sleep(ChoiceDelay);
             var card = Hand.ElementAt(random.Next(1));
-            Play(card);
+            Play(card, playerFinder);
         }
 
         public override int ChoosePlayer()
         {
             Console.Write("Choose a player: ");
             var randomNumber = random.Next(1, 4); 
-            Thread.Sleep(choiceDelay);
+            Thread.Sleep(ChoiceDelay);
             Console.WriteLine(randomNumber);
             return randomNumber;
         }
@@ -34,7 +35,7 @@ namespace LoveLetter.Players
         {
             Console.Write("Choose a Card: ");
             var randomName = PossibleCards.GetRandomName();
-            Thread.Sleep(choiceDelay);
+            Thread.Sleep(ChoiceDelay);
             Console.WriteLine(randomName);
             return randomName;
         }

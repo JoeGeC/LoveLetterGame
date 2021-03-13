@@ -10,16 +10,22 @@ namespace LoveLetter.Players
         private readonly int number;
         protected readonly List<Card> Hand = new List<Card>();
         public bool IsInRound = true;
+        public bool Vulnerable = true;
 
         protected Player(int number)
         {
             this.number = number;
         }
-        
-        public abstract void PlayTurn();
+
+
         public abstract int ChoosePlayer();
         public abstract string ChooseCard();
         public abstract void SeeHandOf(Player player);
+
+        public virtual void PlayTurn(IPlayerFinder playerFinder)
+        {
+            Vulnerable = true;
+        }
 
         public virtual void TakeCard(Card card)
         {
@@ -44,11 +50,11 @@ namespace LoveLetter.Players
             Discard(Hand.ElementAt(0));
         }
         
-        protected void Play(Card card)
+        protected void Play(Card card, IPlayerFinder playerFinder)
         {
             Hand.Remove(card);
             Console.WriteLine($"Player {number} played {card.Name}");
-            card.DoAction(this);
+            card.DoAction(this, playerFinder);
         }
 
         private void Discard(Card card)

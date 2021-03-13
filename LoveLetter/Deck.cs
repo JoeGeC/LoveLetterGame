@@ -20,15 +20,15 @@ namespace LoveLetter
                 new Prince(),
                 new Handmaid(),
                 new Handmaid(),
-                new Baron(game),
-                new Baron(game),
-                new Priest(game),
-                new Priest(game),
-                new Guard(game),
-                new Guard(game),
-                new Guard(game),
-                new Guard(game),
-                new Guard(game)
+                new Baron(),
+                new Baron(),
+                new Priest(),
+                new Priest(),
+                new Guard(),
+                new Guard(),
+                new Guard(),
+                new Guard(),
+                new Guard()
             };
         }
 

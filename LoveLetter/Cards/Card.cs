@@ -9,7 +9,7 @@ namespace LoveLetter.Cards
         protected string Description;
         public int Value;
 
-        public virtual void DoAction(Player currentPlayer)
+        public virtual void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
             Print();
         }

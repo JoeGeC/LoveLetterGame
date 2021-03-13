@@ -1,37 +1,36 @@
 ﻿using System;
-using LoveLetter.Cards.Listeners;
 using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
     public class Guard : Card
     {
-        IGuardListener listener;
-        
-        public Guard(IGuardListener listener)
+        public Guard()
         {
-            this.listener = listener;
             Name = "Guard";
             Description =
                 "Name a non-Guard card and choose another player. If they have that card they're out of the round.";
             Value = 1;
         }
         
-        public override void DoAction(Player currentPlayer)
+        public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            base.DoAction(currentPlayer);
-            var player = ChoosePlayer(currentPlayer);
+            base.DoAction(currentPlayer, playerFinder);
+            var playerNumber = ChoosePlayer(currentPlayer, playerFinder);
+            var player = playerFinder.PlayerAt(playerNumber);
             var card = ChooseCard(currentPlayer);
-            listener.DoGuardAction(player, card);
+            DoGuardAction(player, card);
         }
 
-        private static int ChoosePlayer(Player currentPlayer)
+        private static int ChoosePlayer(Player currentPlayer, IPlayerFinder playerFinder)
         {
             while (true)
             {
-                var chosenPlayer = currentPlayer.ChoosePlayer();
-                if (chosenPlayer > 0 && chosenPlayer < 5)
-                    return chosenPlayer;
+                var chosenPlayerNumber = currentPlayer.ChoosePlayer();
+                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
+                if (chosenPlayer == null) continue;
+                if (chosenPlayer.Vulnerable) return chosenPlayerNumber;
+                Console.WriteLine("Player is protected by handmaid!");
             }
         }
 
@@ -43,6 +42,12 @@ namespace LoveLetter.Cards
                 if (input != null && !input.Equals("guard") && input.IsACard())
                     return input;
             }
+        }
+
+        private static void DoGuardAction(Player player, string card)
+        {
+            if (player.HasCard(card)) player.OutOfRound();
+            else Console.WriteLine("Player did not have a {card}");
         }
     }
 }

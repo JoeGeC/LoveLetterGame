@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LoveLetter.Cards.Listeners;
 using LoveLetter.Players;
 
 namespace LoveLetter
 {
-    public class Game: IGuardListener, IPriestListener, IBaronListener
+    public class Game: IPlayerFinder
     {
         private readonly Deck deck;
 
@@ -44,28 +43,13 @@ namespace LoveLetter
             {
                 if (deck.IsEmpty()) return;
                 player.TakeCard(deck.TakeTopCard());
-                player.PlayTurn();
+                player.PlayTurn(this);
             }
         }
 
-        public void DoGuardAction(int playerNumber, string card)
+        public Player PlayerAt(int number)
         {
-            var player = players.ElementAt(playerNumber - 1);
-            if (player.HasCard(card)) player.OutOfRound();
-            else Console.WriteLine("Player did not have a {card}");
-        }
-
-        public void ShowHandOf(int playerNumber, Player currentPlayer)
-        {
-            var player = players.ElementAt(playerNumber - 1);
-            currentPlayer.SeeHandOf(player);
-        }
-
-        public void CompareHands(int chosenPlayerNumber, Player currentPlayer)
-        {
-            var chosenPlayer = players.ElementAt(chosenPlayerNumber - 1);
-            if(chosenPlayer.FirstCard().Value > currentPlayer.FirstCard().Value) currentPlayer.OutOfRound();
-            if(chosenPlayer.FirstCard().Value < currentPlayer.FirstCard().Value) chosenPlayer.OutOfRound();
+            return players.ElementAtOrDefault(number);
         }
     }
 }

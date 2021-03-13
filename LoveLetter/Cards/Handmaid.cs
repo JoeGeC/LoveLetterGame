@@ -11,9 +11,9 @@ namespace LoveLetter.Cards
             Value = 4;
         }
 
-        public override void DoAction(Player currentPlayer)
+        public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            throw new System.NotImplementedException();
+            currentPlayer.Vulnerable = false;
         }
     }
 }

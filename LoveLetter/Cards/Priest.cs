@@ -1,24 +1,36 @@
-﻿using LoveLetter.Cards.Listeners;
+﻿using System;
 using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
     public class Priest : Card
     {
-        readonly IPriestListener listener;
-        
-        public Priest(IPriestListener listener)
+        public Priest()
         {
-            this.listener = listener;
             Name = "Priest";
             Description = "Look at another player's hand.";
             Value = 2;
         }
 
-        public override void DoAction(Player currentPlayer)
+        public override void DoAction(Player currentPlayer, IPlayerFinder playerFinder)
         {
-            base.DoAction(currentPlayer);
-            listener.ShowHandOf(currentPlayer.ChoosePlayer(), currentPlayer);
+            while (true)
+            {
+                var chosenPlayerNumber = currentPlayer.ChoosePlayer();
+                var chosenPlayer = playerFinder.PlayerAt(chosenPlayerNumber);
+                if (chosenPlayer == null) continue;
+                if (chosenPlayer.Vulnerable)
+                {
+                    ShowHandOf(chosenPlayer, currentPlayer);
+                    return;
+                } 
+                Console.WriteLine("Player is protected by handmaid!");
+            }
+        }
+
+        private static void ShowHandOf(Player chosenPlayer, Player currentPlayer)
+        {
+            currentPlayer.SeeHandOf(chosenPlayer);
         }
     }
 }

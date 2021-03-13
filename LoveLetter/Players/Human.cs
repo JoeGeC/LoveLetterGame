@@ -10,8 +10,9 @@ namespace LoveLetter.Players
         {
         }
 
-        public override void PlayTurn()
+        public override void PlayTurn(IPlayerFinder playerFinder)
         {
+            base.PlayTurn(playerFinder);
             PrintHand();
             Card playCard = null;
             while (playCard == null)
@@ -19,7 +20,7 @@ namespace LoveLetter.Players
                 var cardChoice = ChooseCard();
                 playCard = Hand.FirstOrDefault(card => card.Name.ToLower().Equals(cardChoice));
             }
-            Play(playCard);
+            Play(playCard, playerFinder);
         }
 
         public override int ChoosePlayer()
