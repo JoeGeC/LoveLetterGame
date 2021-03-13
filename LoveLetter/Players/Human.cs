@@ -6,6 +6,10 @@ namespace LoveLetter.Players
 {
     public class Human : Player
     {
+        public Human(int number) : base(number)
+        {
+        }
+        
         public override void TakeCard(Card card)
         {
             base.TakeCard(card);
@@ -18,16 +22,11 @@ namespace LoveLetter.Players
             Card playCard = null;
             while (playCard == null)
             {
-                Console.WriteLine("Please pick a card to play: ");
+                Console.Write("Please pick a card to play: ");
                 var cardChoice = Console.ReadLine()?.ToLower();
-                playCard = hand.First(card => card.Name.ToLower().Equals(cardChoice));
+                playCard = Hand.First(card => card.Name.ToLower().Equals(cardChoice));
             }
-            Discard(playCard);
-        }
-
-        private void Discard(Card card)
-        {
-            hand.Remove(card);
+            Play(playCard);
         }
     }
 }

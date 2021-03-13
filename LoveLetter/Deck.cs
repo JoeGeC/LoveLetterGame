@@ -7,25 +7,30 @@ namespace LoveLetter
 {
     public class Deck
     {
-        List<Card> deck = new List<Card>()
+        private List<Card> deck;
+
+        public Deck(Game game)
         {
-            new Princess(),
-            new Countess(),
-            new King(),
-            new Prince(),
-            new Prince(),
-            new Handmaid(),
-            new Handmaid(),
-            new Baron(),
-            new Baron(),
-            new Priest(),
-            new Priest(),
-            new Guard(),
-            new Guard(),
-            new Guard(),
-            new Guard(),
-            new Guard()
-        };
+            deck = new List<Card>()
+            {
+                new Princess(),
+                new Countess(),
+                new King(),
+                new Prince(),
+                new Prince(),
+                new Handmaid(),
+                new Handmaid(),
+                new Baron(),
+                new Baron(),
+                new Priest(),
+                new Priest(),
+                new Guard(game),
+                new Guard(game),
+                new Guard(game),
+                new Guard(game),
+                new Guard(game)
+            };
+        }
 
         public void Shuffle()
         {

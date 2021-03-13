@@ -8,12 +8,20 @@ namespace LoveLetter.Cards
         protected string Description;
         protected int Value;
 
-        public abstract void DoAction();
+        public virtual void DoAction()
+        {
+            Print();
+        }
 
         public void Print()
         {
             Console.WriteLine("\n" + Name + " - " + Value);
             Console.WriteLine(Description);
+        }
+
+        public bool Is(string cardName)
+        {
+            return Name.ToLower().Equals(cardName.ToLower());
         }
     }
 }

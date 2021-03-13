@@ -1,22 +1,56 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LoveLetter.Cards;
 
 namespace LoveLetter.Players
 {
     public abstract class Player
     {
-        protected readonly List<Card> hand = new List<Card>();
+        private readonly int number;
+        protected readonly List<Card> Hand = new List<Card>();
+        public bool IsInRound = true;
+
+        protected Player(int number)
+        {
+            this.number = number;
+        }
 
         public virtual void TakeCard(Card card)
         {
-            hand.Add(card);
+            Hand.Add(card);
         }
 
         protected void PrintHand()
         {
-            hand.ForEach(card => card.Print());
+            Hand.ForEach(card => card.Print());
         }
 
         public abstract void PlayTurn();
+
+        public bool HasCard(string card)
+        {
+            return Hand.Any(handCard => handCard.Is(card));
+        }
+
+        public void OutOfRound()
+        {
+            IsInRound = false;
+            Console.WriteLine($"Player {number} is out of the round!");
+            Discard(Hand.ElementAt(0));
+        }
+        
+        protected void Play(Card card)
+        {
+            Hand.Remove(card);
+            Console.WriteLine($"Player {number} played {card.Name}");
+            card.DoAction();
+        }
+
+        private void Discard(Card card)
+        {
+            Hand.Remove(card);
+            Console.WriteLine($"Player {number} discarded {card.Name}");
+        }
     }
 }
