@@ -56,5 +56,10 @@ namespace LoveLetter.Players
             Hand.Remove(card);
             Console.WriteLine($"Player {number} discarded {card.Name}");
         }
+
+        public Card FirstCard()
+        {
+            return Hand.ElementAt(0);
+        }
     }
 }

@@ -1,11 +1,15 @@
-﻿using LoveLetter.Players;
+﻿using LoveLetter.Cards.Listeners;
+using LoveLetter.Players;
 
 namespace LoveLetter.Cards
 {
     public class Baron : Card
     {
-        public Baron()
+        private IBaronListener listener;
+
+        public Baron(IBaronListener listener)
         {
+            this.listener = listener;
             Name = "Baron";
             Description =
                 "You and another player secretly compare hands. The player with the lower value is out of the round.";
@@ -14,7 +18,7 @@ namespace LoveLetter.Cards
         
         public override void DoAction(Player currentPlayer)
         {
-            throw new System.NotImplementedException();
+            listener.CompareHands(currentPlayer.ChoosePlayer(), currentPlayer);
         }
     }
 }

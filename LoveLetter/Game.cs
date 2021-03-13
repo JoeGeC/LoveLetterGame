@@ -6,7 +6,7 @@ using LoveLetter.Players;
 
 namespace LoveLetter
 {
-    public class Game: IGuardListener, IPriestListener
+    public class Game: IGuardListener, IPriestListener, IBaronListener
     {
         private readonly Deck deck;
 
@@ -59,6 +59,13 @@ namespace LoveLetter
         {
             var player = players.ElementAt(playerNumber - 1);
             currentPlayer.SeeHandOf(player);
+        }
+
+        public void CompareHands(int chosenPlayerNumber, Player currentPlayer)
+        {
+            var chosenPlayer = players.ElementAt(chosenPlayerNumber - 1);
+            if(chosenPlayer.FirstCard().Value > currentPlayer.FirstCard().Value) currentPlayer.OutOfRound();
+            if(chosenPlayer.FirstCard().Value < currentPlayer.FirstCard().Value) chosenPlayer.OutOfRound();
         }
     }
 }

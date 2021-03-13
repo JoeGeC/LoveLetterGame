@@ -7,7 +7,7 @@ namespace LoveLetter.Cards
     {
         public string Name;
         protected string Description;
-        protected int Value;
+        public int Value;
 
         public virtual void DoAction(Player currentPlayer)
         {
